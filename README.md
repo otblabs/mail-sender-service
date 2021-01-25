@@ -10,7 +10,8 @@ Body <br/>
  {
  "message": "your message",
  "subject" :"your subject",
- "to" : "email reciever"
+ "to" : "email reciever",
+ "from": "email sender"
  }
 
 
