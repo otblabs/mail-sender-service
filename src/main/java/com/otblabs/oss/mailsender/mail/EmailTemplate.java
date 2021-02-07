@@ -9,6 +9,16 @@ public class EmailTemplate {
     private String mailContent;
     private String attachementFile;
 
+    private SenderAccount senderAccount;
+
+    public SenderAccount getSenderAccount() {
+        return senderAccount;
+    }
+
+    public void setSenderAccount(SenderAccount senderAccount) {
+        this.senderAccount = senderAccount;
+    }
+
     public EmailTemplate() {
     }
 
@@ -27,8 +37,6 @@ public class EmailTemplate {
     public void setRecipientEmail(String recipientEmail) {
         this.recipientEmail = recipientEmail;
     }
-
-
 
     public String getSubject() {
         return subject;

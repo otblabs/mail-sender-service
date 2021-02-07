@@ -12,7 +12,7 @@ import java.util.Properties;
 @Service
 public class EmailService {
 
-    public void sendMail(EmailTemplate emailTemplate) throws AddressException, MessagingException, IOException {
+    public void sendMail(EmailTemplate emailTemplate) throws MessagingException, IOException {
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -22,13 +22,13 @@ public class EmailService {
 
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("safariproke@gmail.com", "@Safaripro1");
+                return new PasswordAuthentication(emailTemplate.getSenderAccount().getEmailAddress(), emailTemplate.getSenderAccount().getPassword());
             }
         });
         Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("safariproke@gmail.com", false));
+        msg.setFrom(new InternetAddress(emailTemplate.getSenderAccount().getEmailAddress(), false));
 
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("austinegwa64@gmail.com"));
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailTemplate.getRecipientEmail()));
         msg.setSubject(emailTemplate.getSubject());
         msg.setContent(emailTemplate.getHeaderContent(), "text/html");
         msg.setSentDate(new Date());
